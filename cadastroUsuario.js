@@ -114,9 +114,7 @@ const loadFunction = () => {
                 }
                 else {
                     const { mensagem, erros } = response;
-                    alert(mensagem);
-
-                    console.log(erros);
+                    alert(erros[0]);
                 }
             })
             .catch((error) => {
