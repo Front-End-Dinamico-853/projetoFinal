@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+
+* {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    background-color: darkcyan;
+    color: white;
+}
+
+form{
+    border: 0px;
+}
+
+button, input{
+    padding:10px;
+    margin: 5px;
+    border: 1px solid white;
+    border-radius: 20px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    max-width: 30rem;
+}
+
+input{
+    background-color: white;
+    color: black;
+}
+
+a{
+    text-decoration: none;
+}
+
+#listaContatos tr:hover,
+a:hover{
+    cursor: pointer;
+    font-weight: bold;
+}
+
+li{
+    list-style-type: none;
+}
+
