@@ -5,13 +5,20 @@ const foto = sessionStorage.getItem('userImage');
 const loadForm = (event) => {
     event.preventDefault();
     const form = document.createElement("FORM");
+    form.setAttribute("id", "home-container")
     form.innerHTML = `
+    <div>
     <img src="${foto}" />
+    </div>
+    <div id="home-button-container">
     <button id="attUsuario"><a href="./att.user.html">Atualizar Usuário </a></button>
-    <button id="delUsuario">Deletar Usuário</button>
     <button id="criarContato"><a href="./postContact.html">Criar Contato</a></button>
     <button id="contatos"><a href="./listContacts.html">Lista de Contatos</a></button>
     <button id="sair" ><a href="./login.html">Sair</a></button>    
+    </div>
+    <div>
+    <button id="delUsuario">Excluir Usuário</button>
+    </div>
     `;
     root.append(form);
 

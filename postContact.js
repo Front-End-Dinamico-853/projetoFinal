@@ -20,6 +20,16 @@ const getContact = async () => {
 }
 
 const loadForm = async (event) => {
+
+    root.innerHTML=`
+    <header>
+    <h1><a href="home.html"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
+    <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"/>
+    <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"/>
+    </svg></a>
+    Adicionar contato</h1>
+    </header>`;
+
     event.preventDefault();
     if (idContato) {
         contact = await getContact();
@@ -27,50 +37,138 @@ const loadForm = async (event) => {
     }
     const form = document.createElement("FORM");
     form.innerHTML = `
-    <fieldset>
-    <li>
-    <label for = "usuario">Nome:</label>
-    <input value="${contact.nome}" type="text" name = "nome" id = "nome"></li>
-    <li><label for = "apelido">Apelido:</label>
-    <input value="${contact.apelido}" type="text" name = "apelido" id = "apelido"></li>
-    <li><label for = "telefone">Contatos:</label><br>
-    <label for = "telefone">Telefone(1):</label>
-    <input value="${contact.telefones[0].numero}" type="text" id = "numeroTel1">
-    <label for="tipotel1">Tipo de telefone:</label>
-        <select name="tipoTel1" id="tipoTel1">
-            <option ${contact.telefones[0].tipo == 'casa' ? 'selected' : ''} value="casa">Casa</option>
-            <option ${contact.telefones[0].tipo == 'trabalho' ? 'selected' : ''} value="trabalho">Trabalho</option>
-            <option ${contact.telefones[0].tipo == 'celular' ? 'selected' : ''} value="celular">Celular</option>
-        </select></li>
-    <label for = "telefone">Telefone(2):</label>
-    <input value="${contact.telefones[1].numero}" type="text" id = "numeroTel2">
-        <label for="tipotel2">Tipo de telefone:</label>
-            <select id="tipoTel2">
-                <option ${contact.telefones[1].tipo == 'casa' ? 'selected' : ''} value="casa">Casa</option>
-                <option ${contact.telefones[1].tipo == 'trabalho' ? 'selected' : ''} value="trabalho">Trabalho</option>
-                <option ${contact.telefones[1].tipo == 'celular' ? 'selected' : ''} value="celular">Celular</option>
-            </select></li>
-    <li> <label for = "email">Email:</label>
-    <input value="${contact.email}"type="text" name = "email" id = "email"></li>
-    <li><label for = "endereço">Endereço:</label><br>
-    <label for = "logradouro">Lobradouro:</label>
-    <input value="${contact.endereco.logradouro}"type="text" name = "logradouro" id = "logradouro">
-    <label for = "cidade">Cidade:</label>
-    <input value="${contact.endereco.cidade}"type="text" name = "cidade" id = "cidade">
-    <label for = "estado">Estado:</label>
-    <input value="${contact.endereco.estado}"type="text" name = "estado" id = "estado">
-    <label for = "cep">CEP:</label>
-    <input value="${contact.endereco.cep}"type="text" name = "cep" id = "cep">
-    <label for = "pais">País:</label>
-    <input value="${contact.endereco.pais}"type="text" name = "pais" id = "pais"></li>
-    <li> <label for = "text">Notas:</label>
-    <input value="${contact.notas}"type="text" name = "notas" id = "notas"></li>
-    <li> <label for = "foto">Foto:</label>
-    <input type="file" name = "foto" id = "foto"></li>
-    <img id="imgPreview" src="${contact.foto}"></img>
+    <table>
+    <tbody>
+        <tr>
+            <td>
+                <label for = "usuario">Nome:</label>
+            </td>
+            <td>
+                <input value="${contact.nome}" type="text" name = "nome" id = "nome" placeholder="Digite o nome...">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for = "apelido">Apelido:</label>
+            </td>
+            <td>
+                    <input value="${contact.apelido}" type="text" name = "apelido" id = "apelido" placeholder="Digite o apelido...">
+            </td>
+        </tr>
+        <tr >
+                <td class="table-subtitle" colspan="2">
+                    <label for = "telefone">Contatos</label>
+                </td>
+        </tr>
+        <tr>
+            <td>
+                <label for = "telefone">Telefone(1):</label>
+                <select name="tipoTel1" id="tipoTel1">
+                    <option ${contact.telefones[0].tipo == 'casa' ? 'selected' : ''} value="casa">Casa</option>
+                    <option ${contact.telefones[0].tipo == 'trabalho' ? 'selected' : ''} value="trabalho">Trabalho</option>
+                    <option ${contact.telefones[0].tipo == 'celular' ? 'selected' : ''} value="celular">Celular</option>
+                </select>
+            </td>
+            <td>
+                <input value="${contact.telefones[0].numero}" type="text" id = "numeroTel1" placeholder="(xx) xxxxx-xxxx">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for = "telefone">Telefone(2):</label>
+                <select id="tipoTel2">
+                    <option ${contact.telefones[1].tipo == 'casa' ? 'selected' : ''} value="casa">Casa</option>
+                    <option ${contact.telefones[1].tipo == 'trabalho' ? 'selected' : ''} value="trabalho">Trabalho</option>
+                    <option ${contact.telefones[1].tipo == 'celular' ? 'selected' : ''} value="celular">Celular</option>
+                </select>
+            </td>
+            <td>
+                <input value="${contact.telefones[1].numero}" type="text" id = "numeroTel2" placeholder="(xx) xxxxx-xxxx">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for = "email">Email:</label>
+            </td>
+            <td>
+                <input value="${contact.email}"type="text" name = "email" id = "email" placeholder="email@email.com.br">                
+            </td>
+        </tr>
+        <tr>
+            <td class="table-subtitle" colspan="2">
+                <label for = "endereço">Endereço</label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for = "logradouro">Logradouro:</label>
+            </td>
+            <td>
+                <input value="${contact.endereco.logradouro}"type="text" name = "logradouro" id = "logradouro" placeholder="Digite o logradouro...">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for = "cidade">Cidade:</label>
+            </td>
+            <td>
+                <input value="${contact.endereco.cidade}"type="text" name = "cidade" id = "cidade" placeholder="Digite a cidade...">
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <label for = "estado">Estado:</label>
+            </td>
+            <td>
+                <input value="${contact.endereco.estado}"type="text" name = "estado" id = "estado" placeholder="Digite o estado...">
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <label for = "cep">CEP:</label>
+            </td>
+            <td>
+                <input value="${contact.endereco.cep}"type="text" name = "cep" id = "cep" placeholder="Digite o cep...">
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <label for = "pais">País:</label>
+            </td>
+            <td>
+                <input value="${contact.endereco.pais}"type="text" name = "pais" id = "pais" placeholder="Digite o país...">
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <label for = "text">Notas:</label>
+            </td>
+            <td>
+                <input value="${contact.notas}" type="textarea" name = "notas" id = "notas" placeholder="Adicione notas sobre o contato...">
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <li> <label for = "foto">Foto:</label>
+            </td>
+            <td>
+                <input type="file" name = "foto" id = "foto">                
+            </td>
+        </tr>
+        <tr>
+        <td colspan="2">
+        <img id="imgPreview" src="${contact.foto}"></img>
+        </td>
+        </tr>
+    </tbody>
+</table>
     </fieldset>
-    <button id = "postButton" type="submit">Submeter</button>
-    `;
+    <button id = "postButton" type="submit">Submeter</button>`;
     root.append(form);
 
     document.getElementById('foto').addEventListener('change', function (e) {

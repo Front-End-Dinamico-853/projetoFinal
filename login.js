@@ -12,7 +12,7 @@ const loadForm = (event) => {
     <div id="divLogin">
     <h1>Login</h1>
 
-    <h4>E-mail</h4>
+    <h4>E-mail:</h4>
     <input
       id="emailLogin"
       type="text"
@@ -20,7 +20,7 @@ const loadForm = (event) => {
       placeholder="Seu e-mail..."
     />
 
-    <h4>Senha</h4>
+    <h4>Senha:</h4>
     <input
       id="senhaLogin"
       type="password"
@@ -28,7 +28,7 @@ const loadForm = (event) => {
       placeholder="Sua senha..."
     />
 
-    <button id="submitLogin">Enviar</button>
+    <button id="submitLogin">Entrar</button>
     <br />
     <a href="./cadastroUsuario.html">Faça seu cadastro</a>
     </div>

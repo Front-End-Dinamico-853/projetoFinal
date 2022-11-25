@@ -6,27 +6,35 @@ const loadForm = (event) => {
     event.preventDefault();
     const form = document.createElement("FORM");
     form.innerHTML = `
+    <header>
+    <h1><a href="home.html"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
+    <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"/>
+    <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"/>
+    </svg></a>
+    Atualizar usuário</h1>
+    </header>
+    <main id="att-user-container">
     <div>
-    <label for="email-input">E-mail</label>
+    <h4>E-mail:</h4>
     <input id="email-input" type="text" placeholder="E-mail">
 </div>
 <div>
-    <label for="password-input">Senha</label>
+    <h4>Senha:</h4>
     <input id="password-input" type="password" placeholder="Senha">
 </div>
 <div>
-    <label for="name-input">Nome</label>
+    <h4>Nome:</h4>
     <input id="name-input" type="text" placeholder="Nome">
 </div>   
 <div>
-    <label for="photo-input">Foto</label>
+    <h4>Foto:</h4>
     <input id="photo-input" type="file" placeholder="Foto">
+    </div> 
     <img id="imgPreview" />
-</div> 
-<div>
-    <button type="reset" value="Reset">Limpar</button>
+<div id="att-user-button-container">
     <button id="patch-submit" type="submit" value="Submit">Enviar</button>
 </div>
+</main>
     `;
     root.append(form);
 }
