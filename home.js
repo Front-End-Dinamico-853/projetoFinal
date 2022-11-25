@@ -30,9 +30,9 @@ const loadFunction = () => {
 
     const delUsuario = document.getElementById("delUsuario");
 
-    const deletarUser = (event) => {
+    const deleteUser = (event) => {
         event.preventDefault();
-        if (confirm('Tem certeza de que deseja deletar o usuário?')) {
+        if (confirm('Tem certeza de que deseja excluir o usuário?')) {
             const HEADERS = {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -49,9 +49,9 @@ const loadFunction = () => {
 
             fetch(request).then(function (response) {
                 if (response.ok) {
-                    alert("Usuário Deletado!")
+                    alert("Usuário excluído com sucesso!")
+                    window.location.href = 'login.html';
                 }
-                window.location.href = 'login.html';
             })
         } else {
 
@@ -59,7 +59,7 @@ const loadFunction = () => {
 
     }
 
-    delUsuario.addEventListener('click', deletarUser);
+    delUsuario.addEventListener('click', deleteUser);
 
 }
 window.addEventListener("load", loadFunction)

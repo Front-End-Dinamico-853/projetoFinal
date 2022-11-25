@@ -2,8 +2,26 @@ const token = sessionStorage.getItem("Authorization");
 
 const endPoint = "http://localhost:5000/v1/user";
 
+const getUserFromStorage = () => {
+    return {
+        id: sessionStorage.getItem("idUsuario"),
+        nome: sessionStorage.getItem("userName"),
+        email: sessionStorage.getItem("userEmail"),
+        foto: sessionStorage.getItem("userImage")
+    }
+}
+
+const updateSessionStorage = (user) => {
+    sessionStorage.setItem("idUsuario", user.id);
+    sessionStorage.setItem("userName", user.nome);
+    sessionStorage.setItem("userEmail", user.email);
+    sessionStorage.setItem("userImage", user.foto);
+}
 const loadForm = (event) => {
     event.preventDefault();
+
+    usuario = getUserFromStorage();
+
     const form = document.createElement("FORM");
     form.innerHTML = `
     <header>
@@ -14,23 +32,23 @@ const loadForm = (event) => {
     Atualizar usuário</h1>
     </header>
     <main id="att-user-container">
-    <div>
+<div>
+    <h4>Nome:</h4>
+    <input value="${usuario.nome}" id="name-input" type="text" placeholder="Nome">
+</div>   
+<div>
     <h4>E-mail:</h4>
-    <input id="email-input" type="text" placeholder="E-mail">
+    <input value="${usuario.email}" id="email-input" type="text" placeholder="E-mail">
 </div>
 <div>
     <h4>Senha:</h4>
     <input id="password-input" type="password" placeholder="Senha">
 </div>
 <div>
-    <h4>Nome:</h4>
-    <input id="name-input" type="text" placeholder="Nome">
-</div>   
-<div>
     <h4>Foto:</h4>
     <input id="photo-input" type="file" placeholder="Foto">
     </div> 
-    <img id="imgPreview" />
+    <img id="imgPreview" src="${usuario.foto}" />
 <div id="att-user-button-container">
     <button id="patch-submit" type="submit" value="Submit">Enviar</button>
 </div>
@@ -44,9 +62,6 @@ window.addEventListener('load', loadForm);
 
 const loadFunction = () => {
 
-    const attEmail = document.getElementById("email-input").value;
-    const attPassword = document.getElementById("password-input").value;
-    const attName = document.getElementById("name-input").value;
     const attPhoto = document.getElementById("photo-input");
 
     attPhoto.addEventListener('change', function (e) {
@@ -70,22 +85,18 @@ const loadFunction = () => {
         }
     });
 
-
-
-
-    const attUser = (event) => {
+    const updateUser = (event) => {
         event.preventDefault();
 
+        const attEmail = document.getElementById("email-input").value;
+        const attPassword = document.getElementById("password-input").value;
+        const attName = document.getElementById("name-input").value;
         var imagem = document.getElementById("imgPreview").src;
-
 
         const HEADERS = {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         };
-
-
-
         const request = new Request(endPoint, {
             headers: new Headers(Object.assign(HEADERS,
                 { "Authorization": token })),
@@ -100,22 +111,21 @@ const loadFunction = () => {
 
         sessionStorage.setItem("userImage", imagem)
 
-        fetch(request).then(function (response) {
-            if (response.ok) {
-                alert("Usuário Atualizado!")
+        fetch(request)
+        .then(response => response.json())
+        .then((response) => {
+            if (response.status == 200) {
+                updateSessionStorage(response.data);
+                alert("Usuário atualizado com sucesso!");
+                window.location.href = './home.html';
             }
-            window.location.href = './home.html';
         })
-
-
     }
 
-
     const events = () => {
-        document.addEventListener("submit", attUser)
+        document.addEventListener("submit", updateUser)
     }
 
     events();
-
 }
 window.addEventListener("load", loadFunction)
