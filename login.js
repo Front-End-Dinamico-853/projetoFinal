@@ -75,9 +75,7 @@ const login = (event) => {
             }
             else {
                 const { mensagem, erros } = response;
-                alert(mensagem);
                 alert(erros[0]);
-                alert(erros[1]);
                 console.log(erros);
             }
         })
